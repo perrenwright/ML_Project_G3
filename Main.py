@@ -11,6 +11,9 @@ from sklearn.preprocessing import Imputer
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score 
+from sklearn.metrics import classification_report 
+from sklearn.metrics import f1_score
 print("Clevland Heart Disease Dataset")
 #reads in values from the url 
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data"
@@ -48,5 +51,83 @@ dot_data = tree.export_graphviz(clf, out_file=None)
 graph = graphviz.Source(dot_data) 
 graph.render("Heart Disease")
 #replacing the non-existent values 
-print("banknote authentication Data Set")
-print("habermans survival")
+
+print("Halberman's")
+# Function importing Dataset 
+def importdata(): 
+    haberman_data = pd.read_csv('https://raw.githubusercontent.com/Kurian-lalan/EDA-on-haberman-survival-dataset/master/haberman.csv') 
+    
+    
+    print ("Dataset Length: ", len(haberman_data)) 
+    print ("Dataset Shape: ", haberman_data.shape) 
+    
+    # Printing the dataset obseravtions 
+    print ("Dataset: ",haberman_data.head()) 
+    return haberman_data 
+ 
+
+# Function to split the dataset 
+def splitdataset(haberman_data): 
+  
+    # Seperating the target variable 
+    X = haberman_data.values[:, 0:2] 
+    Y = haberman_data.values[:, 3]  
+    # Spliting the dataset into train and test 
+    X_train, X_test, y_train, y_test = train_test_split(  
+    X, Y, test_size = 0.4, random_state = 204) 
+      
+    return X, Y, X_train, X_test, y_train, y_test
+     
+
+# Function to perform training with entropy. 
+def train_using_entropy(X_train, X_test, y_train): 
+  
+    # Decision tree with entropy 
+    clf_entropy = DecisionTreeClassifier( criterion = "entropy", random_state = 100, max_depth = 8, min_samples_leaf = 10) 
+  
+    # Performing training 
+    clf_entropy.fit(X_train, y_train) 
+    return clf_entropy 
+  
+ 
+
+# Function to make predictions 
+def prediction(X_test, clf_object): 
+  
+    # Predicton on test with giniIndex 
+    y_pred = clf_object.predict(X_test) 
+    print("Predicted values:") 
+    print(y_pred) 
+    return y_pred
+# Function to calculate accuracy 
+def cal_accuracy(y_test, y_pred): 
+      
+    print("Confusion Matrix: ", 
+        confusion_matrix(y_test, y_pred)) 
+      
+    print ("Accuracy : ", 
+    accuracy_score(y_test,y_pred)*100) 
+      
+    print("Report : ", 
+    classification_report(y_test, y_pred)) 
+   
+# Driver code 
+def main(): 
+      
+    # Building Phase 
+    data = importdata() 
+    X, Y, X_train, X_test, y_train, y_test = splitdataset(data) 
+ 
+    clf_entropy = train_using_entropy(X_train, X_test, y_train) 
+      
+    print("Results Using Entropy:") 
+    # Prediction using entropy 
+    y_pred_entropy = prediction(X_test, clf_entropy) 
+    cal_accuracy(y_test, y_pred_entropy) 
+    
+    
+     
+
+# Calling main function 
+if __name__=="__main__": 
+    main()

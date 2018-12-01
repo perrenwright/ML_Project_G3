@@ -1,8 +1,9 @@
 #Perren Wright
 #Cleveland Heart Dataset
 #Going through the dataset
-import pandas as pd
+
 import numpy
+import pandas as pd
 import sys
 import graphviz
 from sklearn import tree
@@ -21,8 +22,6 @@ dataframe = pd.read_csv(url, names = attributes)
 #prints the dataframe values
 #removes non numeric values 
 df = dataframe.apply(pd.to_numeric, errors='coerce')
-print (dataframe)
-print (df)
 #retains the values from the array
 array = df.values
 #splits that dataset into inputs and corresponding results
@@ -34,7 +33,7 @@ X_transf = imputer.fit_transform(X)
 #splitting the data set into training and testing
 X_train, X_test, y_train, y_test = train_test_split(X_transf, Y, test_size = 0.4)
 #building the classifier
-clf = tree.DecisionTreeClassifier()
+clf = tree.DecisionTreeClassifier(max_depth=3)
 #training the model
 clf = clf.fit(X_train, y_train)
 #retrieving the results

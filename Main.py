@@ -138,7 +138,7 @@ authentication = "/home/zizibaby/Documents/Machine Learning/Final Project/bankno
 balance_data = pd.read_csv(authentication, sep = ',', header=0)
 balance_data.head()
 # Function importing Dataset 
-def importdata(): 
+def importdata1(): 
     balance_data = pd.read_csv( authentication,
 
     sep= ',', header =0) 
@@ -152,7 +152,7 @@ def importdata():
     return balance_data 
   
 # Function to split the dataset 
-def splitdataset(balance_data): 
+def splitdataset1(balance_data): 
   
     # Seperating the target variable 
     X = balance_data.values[:, 1:5] 
@@ -165,7 +165,7 @@ def splitdataset(balance_data):
     return X, Y, X_train, X_test, y_train, y_test 
       
 # Function to perform training with giniIndex. 
-def train_using_gini(X_train, X_test, y_train): 
+def train_using_gini1(X_train, X_test, y_train): 
   
     # Creating the classifier object 
     clf_gini = DecisionTreeClassifier(criterion = "gini", 
@@ -176,7 +176,7 @@ def train_using_gini(X_train, X_test, y_train):
     return clf_gini 
       
 # Function to perform training with entropy. 
-def tarin_using_entropy(X_train, X_test, y_train): 
+def tarin_using_entropy1(X_train, X_test, y_train): 
   
     # Decision tree with entropy 
     clf_entropy = DecisionTreeClassifier( 
@@ -189,7 +189,7 @@ def tarin_using_entropy(X_train, X_test, y_train):
   
   
 # Function to make predictions 
-def prediction(X_test, clf_object): 
+def prediction1(X_test, clf_object): 
   
     # Predicton on test with giniIndex 
     y_pred = clf_object.predict(X_test) 
@@ -198,7 +198,7 @@ def prediction(X_test, clf_object):
     return y_pred 
       
 # Function to calculate accuracy 
-def cal_accuracy(y_test, y_pred): 
+def cal_accuracy1(y_test, y_pred): 
       
     print("Confusion Matrix: ", 
         confusion_matrix(y_test, y_pred)) 
@@ -210,27 +210,27 @@ def cal_accuracy(y_test, y_pred):
     classification_report(y_test, y_pred)) 
   
 # Driver code 
-def main(): 
+def main1(): 
       
     # Building Phase 
-    data = importdata() 
-    X, Y, X_train, X_test, y_train, y_test = splitdataset(data) 
-    clf_gini = train_using_gini(X_train, X_test, y_train) 
-    clf_entropy = tarin_using_entropy(X_train, X_test, y_train) 
+    data = importdata1() 
+    X, Y, X_train, X_test, y_train, y_test = splitdataset1(data) 
+    clf_gini = train_using_gini1(X_train, X_test, y_train) 
+    clf_entropy = tarin_using_entropy1(X_train, X_test, y_train) 
       
     # Operational Phase 
     print("Results Using Gini Index:") 
       
     # Prediction using gini 
-    y_pred_gini = prediction(X_test, clf_gini) 
-    cal_accuracy(y_test, y_pred_gini) 
+    y_pred_gini = prediction1(X_test, clf_gini) 
+    cal_accuracy1(y_test, y_pred_gini) 
       
     print("Results Using Entropy:") 
     # Prediction using entropy 
-    y_pred_entropy = prediction(X_test, clf_entropy) 
-    cal_accuracy(y_test, y_pred_entropy) 
+    y_pred_entropy = prediction1(X_test, clf_entropy) 
+    cal_accuracy1(y_test, y_pred_entropy) 
       
       
 # Calling main function 
-if __name__=="__main__": 
-    main() 
+if __name__=="__main1__": 
+    main1() 

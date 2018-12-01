@@ -134,7 +134,9 @@ if __name__=="__main__":
     main()
 
 print("Banknote")
-
+authentication = "/home/zizibaby/Documents/Machine Learning/Final Project/banknote1.csv" 
+balance_data = pd.read_csv(authentication, sep = ',', header=0)
+balance_data.head()
 # Function importing Dataset 
 def importdata(): 
     balance_data = pd.read_csv( authentication,
